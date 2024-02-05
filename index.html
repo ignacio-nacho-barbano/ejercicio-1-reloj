@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body {
+            .boton-apagar {
+                display: none;
+                background: red;
+            }
+
+            .boton-encender {
+                background: green;
+            }
+        }
+
+        body.andando {
+            .boton-apagar {
+                display: block;
+            }
+
+            .boton-encender {
+                background: green;
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Reloj JS</h1>
+    <h2>La hora es:</h2>
+    <h3 id="hora"></h3>
+    <button class="boton-apagar" onclick="apagarReloj()">Apagar Reloj</button>
+    <button class="boton-encender" onclick="encenderReloj()">Encender Reloj</button>
+</body>
+<script>
+    const body = document.body;
+    const elementoHora = document.getElementById('hora');
+    let intervaloReloj;
+
+    function escribirHora() { elementoHora.innerText = new Date().toLocaleTimeString(); }
+
+    function encenderReloj() {
+        escribirHora()
+
+        intervaloReloj = setInterval(function () {
+            escribirHora()
+        }, 1000);
+
+        body.classList.add('andando');
+    }
+
+    function apagarReloj() {
+        clearInterval(intervaloReloj);
+        elementoHora.innerText = '--:--:--';
+        body.classList.remove('andando');
+    }
+
+    encenderReloj();
+</script>
+
+</html>
