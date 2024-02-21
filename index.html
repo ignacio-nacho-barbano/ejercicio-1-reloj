@@ -1,1 +1,129 @@
-xd
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        body {
+
+            width: 100dvw;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: black;
+            color: white;
+
+            .boton-apagar {
+                display: none;
+                background: red;
+            }
+
+            .boton-encender {
+                background: green;
+            }
+        }
+
+        ul {
+            list-style: none;
+
+            li {
+                padding: 20px;
+                border-radius: 12px;
+                border: gray solid 2px;
+            }
+        }
+
+        body.andando {
+            .boton-apagar {
+                display: block;
+            }
+
+            .boton-encender {
+                background: green;
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Reloj JS</h1>
+    <h2>La hora es:</h2>
+    <h3 id="hora"></h3>
+    <ul id="lista-alarmas">
+
+    </ul>
+</body>
+<script>
+    // Declaración de constantes y variables
+    const body = document.body;
+    const listaAlarmas = document.getElementById('lista-alarmas');
+    const elementoHora = document.getElementById('hora');
+    const elementoHoraFutura = document.getElementById('hora-futura');
+    let intervaloReloj;
+
+    const alarmaEjemplo = {
+        id: 5,
+        texto: 'Ver Naruto',
+        hora: new Date('2024-02-21T09:30:00'),
+        activa: true
+    }
+
+
+    // declaración de funciones
+
+    /* FOCO DE LA CLASE DE HOY > */
+    function hacerSonar() {
+        // Api del audio TAG
+    }
+
+    function iniciarTimeout(alarma) {
+        // En esto estaría bueno que nos enfoquemos
+        // setTimeout()
+    }
+    /* < FOCO DE LA CLASE DE HOY */
+
+
+
+    iniciarTimeout(alarmaEjemplo)
+
+    function renderizarAlarma(alarma) {
+        const alarmaDom = document.createElement('li')
+        alarmaDom.innerText = alarma.texto + ' a las ' + alarma.hora.toLocaleTimeString('es-ES')
+        listaAlarmas.appendChild(alarmaDom)
+    }
+
+
+
+    function escribirHora() {
+        const dateAhora = new Date()
+
+
+        elementoHora.innerText = dateAhora.toLocaleTimeString('es-EN');
+        // elementoHoraFutura.innerText = dateFutura.toLocaleTimeString('es-EN');
+    }
+
+    function encenderReloj() {
+        escribirHora()
+
+        intervaloReloj = setInterval(escribirHora, 1000);
+
+        body.classList.add('andando');
+    }
+
+    function apagarReloj() {
+        clearInterval(intervaloReloj);
+        elementoHora.innerText = '--:--:--';
+        body.classList.remove('andando');
+    }
+
+    // llamado de funciones
+    encenderReloj();
+    renderizarAlarma(alarmaEjemplo)
+</script>
+
+</html>
